@@ -2,6 +2,7 @@
  * Created by Aleksandr on 9/20/2020.
  */
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -13,6 +14,7 @@ public class RegressionSuite {
     @Test
     public void apiTest1() {
         given().
+            filter(new AllureRestAssured()).
             when().
             get("http://51.15.94.14:5001/tutors").
             then().
