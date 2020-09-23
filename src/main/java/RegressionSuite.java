@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 
 public class RegressionSuite {
-    @Test
+    @Test(testName = "Get tutors. Test 1")
     public void apiTest1() {
         given().
             filter(new AllureRestAssured()).
@@ -19,6 +19,17 @@ public class RegressionSuite {
             get("http://51.15.94.14:5001/tutors").
             then().
             assertThat().statusCode(200);
+        //get("/products").then().assertThat().body(matchesJsonSchemaInClasspath("products-schema.json"));
+    }
+
+    @Test(testName = "Get tutors. Test 2")
+    public void apiTest2() {
+        given().
+                filter(new AllureRestAssured()).
+                when().
+                get("http://51.15.94.14:5001/tutors").
+                then().
+                assertThat().statusCode(200);
     }
 
     @Test
