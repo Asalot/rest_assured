@@ -32,6 +32,16 @@ public class RegressionSuite {
                 assertThat().statusCode(200);
     }
 
+    @Test(testName = "Get tutors. Test 3")
+    public void apiTest3() {
+        given().
+                filter(new AllureRestAssured()).
+                when().
+                get("http://51.15.94.14:5001/tutors").
+                then().
+                assertThat().statusCode(200);
+    }
+
     @Test
     //chromedriver.exe must be added to PATH variable
     public void uiTest1() {
