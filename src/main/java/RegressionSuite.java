@@ -4,38 +4,17 @@
 
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.Random;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class RegressionSuite {
-    @Test(testName = "Get tutors. Test 1")
-    public void apiTest1() {
-        given().
-            filter(new AllureRestAssured()).
-            when().
-            get("http://51.15.94.14:5001/tutors").
-            then().
-            assertThat().statusCode(200);
-    }
-
-    @Test(testName = "Get tutors. Schema validation. Test 2")
-    public void apiTest2() {
-        given().
-                filter(new AllureRestAssured()).
-                when().
-                get("http://51.15.94.14:5001/tutors")
-                .then()
-                    .assertThat()
-                .body(matchesJsonSchemaInClasspath("tutors-schema.json"));
-    }
-
-    @Test(testName = "Post a tutor. Test 3")
-    public void apiTest3() {
+    @Test(testName = "Positive \"Add a tutor\"")
+    public void apiTestCREATEPositiveAddATutor() {
+        String email = new Random().nextInt(999999999) + "qa@gmail.com";
         String payload = "{   \n" +
                 "    \"title\": \"TEST\",\n" +
                 "    \"pricePerHourTutorTakesDollars\": 200,\n" +
@@ -48,36 +27,44 @@ public class RegressionSuite {
                 "        }\n" +
                 "    ],\n" +
                 "    \"phone\": \"+23238583372974\",\n" +
-                "    \"email\": \"robmc8@gmail.com\",\n" +
+                "    \"email\": \"" + email + "\",\n" +
                 "    \"county\": \"Australia\",\n" +
                 "    \"expirienceYears\": 15,\n" +
                 "    \"skillsDirections\": [\n" +
                 "        \"for work\", \"for interview\"\n" +
                 "    ]\n" +
                 "}";
+        String url = "http://51.15.94.14:5001/tutors";
+        String tutorId = given()
+                .filter(new AllureRestAssured())
+                .contentType(ContentType.JSON)
+                .body(payload).
+        when()
+                .post(url).
+        then()
+                .assertThat().statusCode(201).body(matchesJsonSchemaInClasspath("tutors-post-schema.json"))
+                .extract().
+                path("id");
+        String urlWithTutorId = url + "/" + tutorId; //http://51.15.94.14:5001/tutors/1234123
+        given()
+                .filter(new AllureRestAssured())
+        .when().
+                get(urlWithTutorId)
+        .then()
+                .assertThat().statusCode(200);
+
         given().
                 filter(new AllureRestAssured()).
-                contentType(ContentType.JSON).
-                body(payload).
-                when().
-                post("http://51.15.94.14:5001/tutors").
-                then().
-                assertThat().statusCode(201);
+        when()
+                .delete(urlWithTutorId).
+        then()
+                .assertThat().statusCode(200);
     }
 
-    @Test
-    //chromedriver.exe must be added to PATH variable
-    public void uiTest1() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://qainusa.com");
-        Assert.assertEquals(driver.getTitle(), "QA in USA course");
-        driver.quit();
-    }
-
-    @Test(testName = "1. Positive: POST (verify code, check response time, verify data, validate schema) -> Get (verify code)\n" +
-            "\tPostcondition: DELETE by id (verify code 200)")
-    public void createATutorPositive() {
-        String body = "{   \n" +
+    @Test(testName = "Negative create tutor")
+    public void apiTestCREATENegativeAddATutor() {
+        String existingEmail = "robmc8@gmail.com";
+        String payload = "{   \n" +
                 "    \"title\": \"TEST\",\n" +
                 "    \"pricePerHourTutorTakesDollars\": 200,\n" +
                 "    \"isActive\": true,\n" +
@@ -89,20 +76,22 @@ public class RegressionSuite {
                 "        }\n" +
                 "    ],\n" +
                 "    \"phone\": \"+23238583372974\",\n" +
-                "    \"email\": \"robmc11@gmail.com\",\n" +
+                "    \"email\": \"" + existingEmail + "\",\n" +
                 "    \"county\": \"Australia\",\n" +
                 "    \"expirienceYears\": 15,\n" +
                 "    \"skillsDirections\": [\n" +
                 "        \"for work\", \"for interview\"\n" +
                 "    ]\n" +
                 "}";
-        given().
-                filter(new AllureRestAssured()).
-                contentType(ContentType.JSON).
-                body(body).
-                when().
-                post("http://51.15.94.14:5001/tutors").
-                then().
-                assertThat().statusCode(201);
+        String url = "http://51.15.94.14:5001/tutors";
+        given()
+                .filter(new AllureRestAssured())
+                .contentType(ContentType.JSON)
+                .body(payload).
+        when()
+                .post(url).
+        then()
+                .assertThat().statusCode(409)
+                .body(matchesJsonSchemaInClasspath("tutors-error-schema.json"));
     }
 }

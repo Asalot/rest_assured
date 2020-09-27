@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "error": {
+        "status": 409,
+        "title": "Tutor Already Exists",
+        "message": "There is already a tutor with email 'robmc8@gmail.com'."
+      }
+    }
+  ],
+  "required": [
+    "error"
+  ],
+  "properties": {
+    "error": {
+      "$id": "#/properties/error",
+      "type": "object",
+      "title": "The error schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "status": 409,
+          "title": "Tutor Already Exists",
+          "message": "There is already a tutor with email 'robmc8@gmail.com'."
+        }
+      ],
+      "required": [
+        "status",
+        "title",
+        "message"
+      ],
+      "properties": {
+        "status": {
+          "$id": "#/properties/error/properties/status",
+          "type": "integer",
+          "title": "The status schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            409
+          ]
+        },
+        "title": {
+          "$id": "#/properties/error/properties/title",
+          "type": "string",
+          "title": "The title schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "Tutor Already Exists"
+          ]
+        },
+        "message": {
+          "$id": "#/properties/error/properties/message",
+          "type": "string",
+          "title": "The message schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "There is already a tutor with email 'robmc8@gmail.com'."
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
