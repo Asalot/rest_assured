@@ -1,0 +1,285 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "array",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": [],
+  "examples": [
+    [
+      {
+        "languagesTutorTeaches": [
+          {
+            "english": "Native"
+          }
+        ],
+        "skillsDirections": [
+          "for work",
+          "for interview"
+        ],
+        "id": "5f66970a7fd4ca0018ce6910",
+        "title": "TEST",
+        "pricePerHourTutorTakesDollars": 200,
+        "isActive": true,
+        "firstLastName": "Robert D",
+        "photoLocation": "https://thumb.tildacdn.com/tild3731-3938-4237-b962-346136376436/-/cover/560x560/center/center/-/format/webp/sdfewfwe.jpg",
+        "phone": "+23238583374974",
+        "email": "robmcz@gmail.com",
+        "county": "Australia",
+        "expirienceYears": 15
+      },
+      {
+        "languagesTutorTeaches": [
+          {
+            "english": "Native"
+          }
+        ],
+        "skillsDirections": [
+          "for work",
+          "for interview"
+        ],
+        "id": "5f66977b7fd4ca0018ce691c",
+        "title": "TEST",
+        "pricePerHourTutorTakesDollars": 200,
+        "isActive": true,
+        "firstLastName": "Robert D",
+        "photoLocation": "https://thumb.tildacdn.com/tild3731-3938-4237-b962-346136376436/-/cover/560x560/center/center/-/format/webp/sdfewfwe.jpg",
+        "phone": "+23238583374974",
+        "email": "robmcccz@gmail.com",
+        "county": "Australia",
+        "expirienceYears": 15
+      }
+    ]
+  ],
+  "additionalItems": true,
+  "items": {
+    "$id": "#/items",
+    "anyOf": [
+      {
+        "$id": "#/items/anyOf/0",
+        "type": "object",
+        "title": "The first anyOf schema",
+        "description": "An explanation about the purpose of this instance.",
+        "default": {},
+        "examples": [
+          {
+            "languagesTutorTeaches": [
+              {
+                "english": "Native"
+              }
+            ],
+            "skillsDirections": [
+              "for work",
+              "for interview"
+            ],
+            "id": "5f66970a7fd4ca0018ce6910",
+            "title": "TEST",
+            "pricePerHourTutorTakesDollars": 200,
+            "isActive": true,
+            "firstLastName": "Robert D",
+            "photoLocation": "https://thumb.tildacdn.com/tild3731-3938-4237-b962-346136376436/-/cover/560x560/center/center/-/format/webp/sdfewfwe.jpg",
+            "phone": "+23238583374974",
+            "email": "robmcz@gmail.com",
+            "county": "Australia",
+            "expirienceYears": 15
+          }
+        ],
+        "required": [
+          "languagesTutorTeaches",
+          "skillsDirections",
+          "id",
+          "title",
+          "pricePerHourTutorTakesDollars",
+          "isActive",
+          "firstLastName",
+          "photoLocation",
+          "phone",
+          "email",
+          "county",
+          "expirienceYears"
+        ],
+        "properties": {
+          "languagesTutorTeaches": {
+            "$id": "#/items/anyOf/0/properties/languagesTutorTeaches",
+            "type": "array",
+            "title": "The languagesTutorTeaches schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+              [
+                {
+                  "english": "Native"
+                }
+              ]
+            ],
+            "additionalItems": true,
+            "items": {
+              "$id": "#/items/anyOf/0/properties/languagesTutorTeaches/items",
+              "anyOf": [
+                {
+                  "$id": "#/items/anyOf/0/properties/languagesTutorTeaches/items/anyOf/0",
+                  "type": "object",
+                  "title": "The first anyOf schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": {},
+                  "examples": [
+                    {
+                      "english": "Native"
+                    }
+                  ],
+                  "required": [
+                    "english"
+                  ],
+                  "properties": {
+                    "english": {
+                      "$id": "#/items/anyOf/0/properties/languagesTutorTeaches/items/anyOf/0/properties/english",
+                      "type": "string",
+                      "title": "The english schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": "",
+                      "examples": [
+                        "Native"
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              ]
+            }
+          },
+          "skillsDirections": {
+            "$id": "#/items/anyOf/0/properties/skillsDirections",
+            "type": "array",
+            "title": "The skillsDirections schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+              [
+                "for work",
+                "for interview"
+              ]
+            ],
+            "additionalItems": true,
+            "items": {
+              "$id": "#/items/anyOf/0/properties/skillsDirections/items",
+              "anyOf": [
+                {
+                  "$id": "#/items/anyOf/0/properties/skillsDirections/items/anyOf/0",
+                  "type": "string",
+                  "title": "The first anyOf schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                    "for work",
+                    "for interview"
+                  ]
+                }
+              ]
+            }
+          },
+          "id": {
+            "$id": "#/items/anyOf/0/properties/id",
+            "type": "string",
+            "title": "The id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "5f66970a7fd4ca0018ce6910"
+            ]
+          },
+          "title": {
+            "$id": "#/items/anyOf/0/properties/title",
+            "type": "string",
+            "title": "The title schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "TEST"
+            ]
+          },
+          "pricePerHourTutorTakesDollars": {
+            "$id": "#/items/anyOf/0/properties/pricePerHourTutorTakesDollars",
+            "type": "integer",
+            "title": "The pricePerHourTutorTakesDollars schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+              200
+            ]
+          },
+          "isActive": {
+            "$id": "#/items/anyOf/0/properties/isActive",
+            "type": "boolean",
+            "title": "The isActive schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": false,
+            "examples": [
+              true
+            ]
+          },
+          "firstLastName": {
+            "$id": "#/items/anyOf/0/properties/firstLastName",
+            "type": "string",
+            "title": "The firstLastName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "Robert D"
+            ]
+          },
+          "photoLocation": {
+            "$id": "#/items/anyOf/0/properties/photoLocation",
+            "type": "string",
+            "title": "The photoLocation schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "https://thumb.tildacdn.com/tild3731-3938-4237-b962-346136376436/-/cover/560x560/center/center/-/format/webp/sdfewfwe.jpg"
+            ]
+          },
+          "phone": {
+            "$id": "#/items/anyOf/0/properties/phone",
+            "type": "string",
+            "title": "The phone schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "+23238583374974"
+            ]
+          },
+          "email": {
+            "$id": "#/items/anyOf/0/properties/email",
+            "type": "string",
+            "title": "The email schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "robmcz@gmail.com"
+            ]
+          },
+          "county": {
+            "$id": "#/items/anyOf/0/properties/county",
+            "type": "string",
+            "title": "The county schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "Australia"
+            ]
+          },
+          "expirienceYears": {
+            "$id": "#/items/anyOf/0/properties/expirienceYears",
+            "type": "integer",
+            "title": "The expirienceYears schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+              15
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    ]
+  }
+}
