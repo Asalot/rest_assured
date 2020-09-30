@@ -1,0 +1,226 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "languagesTutorTeaches": [
+        {
+          "english": "Native"
+        }
+      ],
+      "skillsDirections": [
+        "for work",
+        "for interview"
+      ],
+      "title": "TEST",
+      "pricePerHourTutorTakesDollars": 50001,
+      "isActive": true,
+      "firstLastName": "Robert M2c",
+      "photoLocation": "https://thumb.tildacdn.com/tild3731-3938-4237-b962-346136376436/-/cover/560x560/center/center/-/format/webp/sdfewfwe.jpg",
+      "phone": "+23238583372974",
+      "email": "robmc8@gmail.com",
+      "county": "Australia",
+      "expirienceYears": 15,
+      "id": "5f6fd9cd7fd4ca0018ce6991"
+    }
+  ],
+  "required": [
+    "languagesTutorTeaches",
+    "skillsDirections",
+    "title",
+    "pricePerHourTutorTakesDollars",
+    "isActive",
+    "firstLastName",
+    "photoLocation",
+    "phone",
+    "email",
+    "county",
+    "expirienceYears",
+    "id"
+  ],
+  "properties": {
+    "languagesTutorTeaches": {
+      "$id": "#/properties/languagesTutorTeaches",
+      "type": "array",
+      "title": "The languagesTutorTeaches schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "english": "Native"
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/languagesTutorTeaches/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/languagesTutorTeaches/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "english": "Native"
+              }
+            ],
+            "required": [
+              "english"
+            ],
+            "properties": {
+              "english": {
+                "$id": "#/properties/languagesTutorTeaches/items/anyOf/0/properties/english",
+                "type": "string",
+                "title": "The english schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "Native"
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "skillsDirections": {
+      "$id": "#/properties/skillsDirections",
+      "type": "array",
+      "title": "The skillsDirections schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          "for work",
+          "for interview"
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/skillsDirections/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/skillsDirections/items/anyOf/0",
+            "type": "string",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "for work",
+              "for interview"
+            ]
+          }
+        ]
+      }
+    },
+    "title": {
+      "$id": "#/properties/title",
+      "type": "string",
+      "title": "The title schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "TEST"
+      ]
+    },
+    "pricePerHourTutorTakesDollars": {
+      "$id": "#/properties/pricePerHourTutorTakesDollars",
+      "type": "integer",
+      "title": "The pricePerHourTutorTakesDollars schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        50001
+      ]
+    },
+    "isActive": {
+      "$id": "#/properties/isActive",
+      "type": "boolean",
+      "title": "The isActive schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        true
+      ]
+    },
+    "firstLastName": {
+      "$id": "#/properties/firstLastName",
+      "type": "string",
+      "title": "The firstLastName schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "Robert M2c"
+      ]
+    },
+    "photoLocation": {
+      "$id": "#/properties/photoLocation",
+      "type": "string",
+      "title": "The photoLocation schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://thumb.tildacdn.com/tild3731-3938-4237-b962-346136376436/-/cover/560x560/center/center/-/format/webp/sdfewfwe.jpg"
+      ]
+    },
+    "phone": {
+      "$id": "#/properties/phone",
+      "type": "string",
+      "title": "The phone schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "+23238583372974"
+      ]
+    },
+    "email": {
+      "$id": "#/properties/email",
+      "type": "string",
+      "title": "The email schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "robmc8@gmail.com"
+      ]
+    },
+    "county": {
+      "$id": "#/properties/county",
+      "type": "string",
+      "title": "The county schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "Australia"
+      ]
+    },
+    "expirienceYears": {
+      "$id": "#/properties/expirienceYears",
+      "type": "integer",
+      "title": "The expirienceYears schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        15
+      ]
+    },
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "5f6fd9cd7fd4ca0018ce6991"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
