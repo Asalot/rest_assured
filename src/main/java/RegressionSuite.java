@@ -14,8 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.*;
 
 public class RegressionSuite {
     @Test(testName = "Positive \"Add a tutor\"")
@@ -52,6 +51,7 @@ public class RegressionSuite {
                 .time(lessThan(1L), TimeUnit.SECONDS)
                 .statusCode(201)
                 .body(matchesJsonSchemaInClasspath("tutors-post-schema.json"))
+                .body("email", equalTo(email))
                 .extract().
                 path("id");
         String urlWithTutorId = url + "/" + tutorId; //http://51.15.94.14:5001/tutors/1234123
@@ -180,6 +180,7 @@ public class RegressionSuite {
         .then()
                 .assertThat().statusCode(200)
                 .time(lessThan(1L), TimeUnit.SECONDS)
+                .body("size()", is(greaterThan(1)))
                 .body(matchesJsonSchemaInClasspath("tutors-schema.json"));
         //DELETE tutor 1
         given().
@@ -240,6 +241,7 @@ public class RegressionSuite {
                 .then()
                 .assertThat().statusCode(200)
                 .time(lessThan(1L), TimeUnit.SECONDS)
+                .body("id", equalTo(tutorId))
                 .body(matchesJsonSchemaInClasspath("tutor-get-schema.json"));
         given().
                 filter(new AllureRestAssured()).
@@ -302,6 +304,7 @@ public class RegressionSuite {
         .when()
                 .delete(urlWithId)
         .then().assertThat().statusCode(200).time(lessThan(1L), TimeUnit.SECONDS)
+                .body("title", equalTo("TEST"))
                 .body(matchesJsonSchemaInClasspath("tutor-delete-schema.json"));
 
         given()
