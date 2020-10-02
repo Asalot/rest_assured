@@ -2,8 +2,11 @@
  * Created by Aleksandr on 9/20/2020.
  */
 
+import io.qameta.allure.Issue;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Random;
@@ -11,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
 public class RegressionSuite {
@@ -308,4 +312,119 @@ public class RegressionSuite {
                     .assertThat().statusCode(404).time(lessThan(1l), TimeUnit.SECONDS)
                     .body(matchesJsonSchemaInClasspath("tutors-error-schema.json"));
     }
+
+    @Test(description = "Update tutor name. Positive")
+    public void apiTestUPDATEPositiveUpdateATutor() {
+        String url = "http://51.15.94.14:5001/tutors";
+        String email = new Random().nextInt(9999999) + "qa@gmail.com";
+        String payload = "{   \n" +
+                "    \"title\": \"TEST\",\n" +
+                "    \"pricePerHourTutorTakesDollars\": 200,\n" +
+                "    \"isActive\": true,\n" +
+                "    \"firstLastName\": \"Robert M2c\",\n" +
+                "    \"photoLocation\": \"https://thumb.tildacdn.com/tild3731-3938-4237-b962-346136376436/-/cover/560x560/center/center/-/format/webp/sdfewfwe.jpg\",\n" +
+                "    \"languagesTutorTeaches\": [\n" +
+                "        {\n" +
+                "            \"english\": \"Native\"\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"phone\": \"+23238583372974\",\n" +
+                "    \"email\": \"" + email + "\",\n" +
+                "    \"county\": \"Australia\",\n" +
+                "    \"expirienceYears\": 15,\n" +
+                "    \"skillsDirections\": [\n" +
+                "        \"for work\", \"for interview\"\n" +
+                "    ]\n" +
+                "}";
+        String tutorId =
+                given()
+                        .filter(new AllureRestAssured())
+                        .contentType(ContentType.JSON)
+                        .body(payload).
+                        when()
+                        .post(url).
+                        then()
+                        .assertThat()
+                        .statusCode(201)
+                        .extract()
+                        .path("id");
+
+        String expectedFirstLastName = "UPDATED Robert M2c";
+        String urlWithTutorId = url + "/" + tutorId;
+            given()
+                .filter(new AllureRestAssured()).contentType(ContentType.JSON).body("{\"firstLastName\": \""+ expectedFirstLastName + "\"}")
+            .when()
+                .patch(urlWithTutorId)
+            .then()
+                .assertThat().statusCode(200)
+                .time(lessThan(1l), TimeUnit.SECONDS).body(matchesJsonSchemaInClasspath("tutors-post-schema.json"));
+
+        given()
+                .filter(new AllureRestAssured())
+            .when()
+                .get(urlWithTutorId)
+            .then().assertThat().statusCode(200).body("firstLastName", equalTo(expectedFirstLastName));
+
+        //Post-conditions
+        given().filter(new AllureRestAssured())
+                .when().delete(urlWithTutorId).then().statusCode(200);
+        }
+
+        @Test(description = "Negative \"Update a tutor with the empty name\"")
+        @Issue("E2L-48")
+        public void apiTestUPDATENegativeUpdateATutor() {
+            String url = "http://51.15.94.14:5001/tutors";
+            String email = new Random().nextInt(9999999) + "qa@gmail.com";
+            String payload = "{   \n" +
+                    "    \"title\": \"TEST\",\n" +
+                    "    \"pricePerHourTutorTakesDollars\": 200,\n" +
+                    "    \"isActive\": true,\n" +
+                    "    \"firstLastName\": \"Robert M2c\",\n" +
+                    "    \"photoLocation\": \"https://thumb.tildacdn.com/tild3731-3938-4237-b962-346136376436/-/cover/560x560/center/center/-/format/webp/sdfewfwe.jpg\",\n" +
+                    "    \"languagesTutorTeaches\": [\n" +
+                    "        {\n" +
+                    "            \"english\": \"Native\"\n" +
+                    "        }\n" +
+                    "    ],\n" +
+                    "    \"phone\": \"+23238583372974\",\n" +
+                    "    \"email\": \"" + email + "\",\n" +
+                    "    \"county\": \"Australia\",\n" +
+                    "    \"expirienceYears\": 15,\n" +
+                    "    \"skillsDirections\": [\n" +
+                    "        \"for work\", \"for interview\"\n" +
+                    "    ]\n" +
+                    "}";
+            String tutorId =
+                    given()
+                            .filter(new AllureRestAssured())
+                            .contentType(ContentType.JSON)
+                            .body(payload).
+                            when()
+                            .post(url).
+                            then()
+                            .assertThat()
+                            .statusCode(201)
+                            .extract()
+                            .path("id");
+
+            String urlWithTutorId = url + "/" + tutorId;
+            given()
+                    .filter(new AllureRestAssured()).contentType(ContentType.JSON).body("{\"carrots\": 20}")
+                    .when()
+                    .patch(urlWithTutorId)
+                    .then()
+                    .assertThat().statusCode(400)
+                    .time(lessThan(1l), TimeUnit.SECONDS).body(matchesJsonSchemaInClasspath("tutors-error-schema.json"));
+
+            Response response = given()
+                    .filter(new AllureRestAssured())
+                    .when()
+                    .get(urlWithTutorId);
+            String responseBody = response.getBody().toString();
+            Assert.assertFalse(responseBody.contains("sell"));
+
+            //Post-conditions
+            given().filter(new AllureRestAssured())
+                    .when().delete(urlWithTutorId).then().statusCode(200);
+        }
 }
