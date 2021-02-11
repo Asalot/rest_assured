@@ -39,7 +39,7 @@ public class RegressionSuite {
                 "        \"for work\", \"for interview\"\n" +
                 "    ]\n" +
                 "}";
-        String url = "http://51.15.94.14:5001/tutors";
+        String url = "http://51.15.218.168:5001/tutors";
         String tutorId = given()
                 .filter(new AllureRestAssured())
                 .contentType(ContentType.JSON)
@@ -54,7 +54,7 @@ public class RegressionSuite {
                 .body("email", equalTo(email))
                 .extract().
                 path("id");
-        String urlWithTutorId = url + "/" + tutorId; //http://51.15.94.14:5001/tutors/1234123
+        String urlWithTutorId = url + "/" + tutorId; //http://51.15.218.168:5001/tutors/1234123
         given()
                 .filter(new AllureRestAssured())
         .when().
@@ -92,7 +92,7 @@ public class RegressionSuite {
                 "        \"for work\", \"for interview\"\n" +
                 "    ]\n" +
                 "}";
-        String url = "http://51.15.94.14:5001/tutors";
+        String url = "http://51.15.218.168:5001/tutors";
         given()
                 .filter(new AllureRestAssured())
                 .contentType(ContentType.JSON)
@@ -146,7 +146,7 @@ public class RegressionSuite {
                 "        \"for work\", \"for interview\"\n" +
                 "    ]\n" +
                 "}";
-        String url = "http://51.15.94.14:5001/tutors";
+        String url = "http://51.15.218.168:5001/tutors";
         String tutor1Id =
             given()
                 .filter(new AllureRestAssured())
@@ -220,7 +220,7 @@ public class RegressionSuite {
                 "        \"for work\", \"for interview\"\n" +
                 "    ]\n" +
                 "}";
-        String url = "http://51.15.94.14:5001/tutors";
+        String url = "http://51.15.218.168:5001/tutors";
         String tutorId =
             given()
                 .filter(new AllureRestAssured())
@@ -253,7 +253,7 @@ public class RegressionSuite {
 
     @Test(description = "Negative \"Delete all tutors\" (verify 405 error code,  verify schema)")
     public void apiTestDELETENegativeDeleteAllTutors() {
-        String url = "http://51.15.94.14:5001/tutors";
+        String url = "http://51.15.218.168:5001/tutors";
         given()
                 .filter(new AllureRestAssured())
         .when()
@@ -265,7 +265,7 @@ public class RegressionSuite {
 
     @Test(description = "Positive \"Delete a tutor\" ")
     public void apiTestDELETEPositiveDeleteATutor() {
-        String url = "http://51.15.94.14:5001/tutors";
+        String url = "http://51.15.218.168:5001/tutors";
         String email = new Random().nextInt(9999999) + "qa@gmail.com";
         String payload = "{   \n" +
                 "    \"title\": \"TEST\",\n" +
@@ -318,7 +318,7 @@ public class RegressionSuite {
 
     @Test(description = "Update tutor name. Positive")
     public void apiTestUPDATEPositiveUpdateATutor() {
-        String url = "http://51.15.94.14:5001/tutors";
+        String url = "http://51.15.218.168:5001/tutors";
         String email = new Random().nextInt(9999999) + "qa@gmail.com";
         String payload = "{   \n" +
                 "    \"title\": \"TEST\",\n" +
@@ -376,7 +376,7 @@ public class RegressionSuite {
         @Test(description = "Negative \"Update a tutor with the empty name\"")
         @Issue("E2L-48")
         public void apiTestUPDATENegativeUpdateATutor() {
-            String url = "http://51.15.94.14:5001/tutors";
+            String url = "http://51.15.218.168:5001/tutors";
             String email = new Random().nextInt(9999999) + "qa@gmail.com";
             String payload = "{   \n" +
                     "    \"title\": \"TEST\",\n" +
