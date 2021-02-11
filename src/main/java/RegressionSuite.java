@@ -19,8 +19,10 @@ import static org.hamcrest.Matchers.*;
 public class RegressionSuite {
     @Test(testName = "Positive \"Add a tutor\"")
     public void apiTestCREATEPositiveAddATutor() {
-        String email = new Random().nextInt(999999999) + "qa@gmail.com";
+        int id = new Random().nextInt(999999999);
+        String email = id + "qa@gmail.com";
         String payload = "{   \n" +
+                "    \"id\":  \"" + id + "\",\n" +
                 "    \"title\": \"TEST\",\n" +
                 "    \"pricePerHourTutorTakesDollars\": 200,\n" +
                 "    \"isActive\": true,\n" +
@@ -72,8 +74,10 @@ public class RegressionSuite {
 
     @Test(testName = "Negative create tutor")
     public void apiTestCREATENegativeAddATutor() {
-        String existingEmail = "robmc8@gmail.com";
+        String existingId = "435bd930-97dd-4ded-84ba-f3f39644084e";
+        String email = existingId + "qa@gmail.com";
         String payload = "{   \n" +
+                "    \"id\":  \"" + existingId + "\",\n" +
                 "    \"title\": \"TEST\",\n" +
                 "    \"pricePerHourTutorTakesDollars\": 200,\n" +
                 "    \"isActive\": true,\n" +
@@ -85,7 +89,7 @@ public class RegressionSuite {
                 "        }\n" +
                 "    ],\n" +
                 "    \"phone\": \"+23238583372974\",\n" +
-                "    \"email\": \"" + existingEmail + "\",\n" +
+                "    \"email\": \"" + email + "\",\n" +
                 "    \"county\": \"Australia\",\n" +
                 "    \"expirienceYears\": 15,\n" +
                 "    \"skillsDirections\": [\n" +
@@ -200,8 +204,10 @@ public class RegressionSuite {
 
     @Test(description = "Get tutor by ID")
     public void apiTestREADPositiveGetTutorById() {
-        String email = new Random().nextInt(9999999) + "qa@gmail.com";
+        int id = new Random().nextInt(999999999);
+        String email = id + "qa@gmail.com";
         String payload = "{   \n" +
+                "    \"id\":  \"" + id + "\",\n" +
                 "    \"title\": \"TEST\",\n" +
                 "    \"pricePerHourTutorTakesDollars\": 200,\n" +
                 "    \"isActive\": true,\n" +
@@ -266,8 +272,10 @@ public class RegressionSuite {
     @Test(description = "Positive \"Delete a tutor\" ")
     public void apiTestDELETEPositiveDeleteATutor() {
         String url = "http://51.15.218.168:6001/tutors";
-        String email = new Random().nextInt(9999999) + "qa@gmail.com";
+        int id = new Random().nextInt(999999999);
+        String email = id + "qa@gmail.com";
         String payload = "{   \n" +
+                "    \"id\":  \"" + id + "\",\n" +
                 "    \"title\": \"TEST\",\n" +
                 "    \"pricePerHourTutorTakesDollars\": 200,\n" +
                 "    \"isActive\": true,\n" +
@@ -319,8 +327,10 @@ public class RegressionSuite {
     @Test(description = "Update tutor name. Positive")
     public void apiTestUPDATEPositiveUpdateATutor() {
         String url = "http://51.15.218.168:6001/tutors";
-        String email = new Random().nextInt(9999999) + "qa@gmail.com";
+        int id = new Random().nextInt(999999999);
+        String email = id + "qa@gmail.com";
         String payload = "{   \n" +
+                "    \"id\":  \"" + id + "\",\n" +
                 "    \"title\": \"TEST\",\n" +
                 "    \"pricePerHourTutorTakesDollars\": 200,\n" +
                 "    \"isActive\": true,\n" +
@@ -377,9 +387,10 @@ public class RegressionSuite {
         @Issue("E2L-48")
         public void apiTestUPDATENegativeUpdateATutor() {
             String url = "http://51.15.218.168:6001/tutors";
-            String email = new Random().nextInt(9999999) + "qa@gmail.com";
+            int id = new Random().nextInt(999999999);
+            String email = id + "qa@gmail.com";
             String payload = "{   \n" +
-                    "    \"title\": \"TEST\",\n" +
+                    "    \"id\":  \"" + id + "\",\n" +
                     "    \"pricePerHourTutorTakesDollars\": 200,\n" +
                     "    \"isActive\": true,\n" +
                     "    \"firstLastName\": \"Robert M2c\",\n" +
